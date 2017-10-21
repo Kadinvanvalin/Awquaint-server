@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     user.latitude = params[:latitude]
     user.save
 
-
+    user.nearby.map { |user| {id: user.id, interest: user.interest} }.to_json
   end
 
   private
