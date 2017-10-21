@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
     # does session id work in swift/mobile?
     @user = User.find(email: params[:email])
     if @user && @user.authenticate(params[:password])
-      render json: {status: 'SUCCESS'}, status: :ok
+       render json: {id: @user.id, name: @user.name, interest: @user.interest}, status: :ok
     else
       render json: {status: "error", message: "Invalid email and/or password" }, status: 400
     end
