@@ -11,6 +11,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def search
+    user = User.find(params[:id])
+    user.longitude = params[:longitude]
+    user.latitude = params[:latitude]
+    user.save
+
+    user.nearby.map { |user| {id: user.id, interest: user.interest} }.to_json
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :email, :password, :interest)
