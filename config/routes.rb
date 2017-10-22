@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
 
-  get '/users/search', to: "users#search"
+  post '/users/search', to: "users#search"
 end
