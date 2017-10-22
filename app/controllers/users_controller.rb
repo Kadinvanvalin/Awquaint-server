@@ -12,9 +12,9 @@ class UsersController < ApplicationController
   end
 
   def search
-    user = User.find(params[:id])
-    user.longitude = params[:longitude]
-    user.latitude = params[:latitude]
+    user = User.find(params[:id].to_i)
+    user.longitude = params[:longitude].to_f
+    user.latitude = params[:latitude].to_f
     user.save
 
     user.nearby.map { |user| {id: user.id, interest: user.interest} }.to_json
