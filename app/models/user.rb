@@ -15,9 +15,11 @@ class User < ApplicationRecord
 
     nearby_users = []
     User.all.each do |user|
-      if user.longitude > min_longitude && user.longitude < max_longitude
-        if user.latitude > min_latitude && user.latitude < max_latitude
-          nearby_users << user unless user.id == self.id
+      if user.longitude != nil && user.latitude != nil
+        if user.longitude > min_longitude && user.longitude < max_longitude
+          if user.latitude > min_latitude && user.latitude < max_latitude
+            nearby_users << user unless user.id == self.id
+          end
         end
       end
     end
