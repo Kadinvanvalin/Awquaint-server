@@ -4,6 +4,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
+    if @user.interest == nil
+      @user.interest = "No interest provided"
+    end
     if @user.save
        render json: {id: @user.id, name: @user.name, interest: @user.interest}, status: :ok
     else
