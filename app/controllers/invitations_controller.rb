@@ -13,7 +13,7 @@ class InvitationsController < ApplicationController
   end
 
   def check
-    @user = User.find(params[:current_user_id])
+    @user = User.find(params[:current_user_id].to_i)
     pending_invites = @user.received_invitations.where(accepted: "pending")
     accepted_invitations = @user.sent_invitations.where(accepted: "accepted")
     declined_invitations = @user.sent_invitations.where(accepted: "declined")
@@ -34,9 +34,9 @@ class InvitationsController < ApplicationController
   end
 
   def response
-    invite = Invitation.find_by(sender_id: params[:sender_id], receiver_id: params[:current_user_id])
+    invite = Invitation.find_by(sender_id: params[:sender_id].to_i, receiver_id: params[:current_user_id].to_i)
     if params[:response] == "accepted"
-      sender = User.find(params[:sender_id])
+      sender = User.find(params[:sender_id].to_i)
       invite.accepted = "accepted"
       invite.save
       render json: {name: sender.name, interest: sender.interest}, status: 200
