@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   post '/invitations', to: "invitations#create"
 
   post '/invitations/check', to: "invitations#check"
+
+  post '/invitations/response', to: "invitations#response"
 end
