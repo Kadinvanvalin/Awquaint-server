@@ -9,5 +9,5 @@ Rails.application.routes.draw do
 
   post '/invitations/check', to: "invitations#check"
 
-  post '/invitations/response', to: "invitations#response"
+  post '/invitations/response', to: "invitations#invitation_response"
 end
