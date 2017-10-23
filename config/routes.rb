@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   post '/invitations/check', to: "invitations#check"
 
   post '/invitations/response', to: "invitations#invitation_response"
+
+  post '/users/profile', to: "users#add_image"
 end

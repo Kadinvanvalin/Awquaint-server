@@ -26,7 +26,7 @@ class InvitationsController < ApplicationController
     if accepted_invitations.length > 0
       connection = accepted_invitations[0].receiver
       accepted_invitations[0].destroy
-      render json: {name: connection.name, interest: connection.interest}, status: 202
+      render json: {name: connection.name, interest: connection.interest, image: connection.image.url }, status: 202
     elsif  pending_invites.length > 0
       sender = pending_invites[0].sender
       render json: {pending_sender_id: sender.id, pending_sender_interest: sender.interest}, status: :ok
@@ -45,7 +45,7 @@ class InvitationsController < ApplicationController
       sender = User.find(params[:sender_id].to_i)
       invite.accepted = "accepted"
       invite.save
-      render json: {name: sender.name, interest: sender.interest}, status: 200
+       render json: {name: sender.name, interest: sender.interest, image: sender.image.url}, status: 200
     else
       invite.accepted = "declined"
       invite.save

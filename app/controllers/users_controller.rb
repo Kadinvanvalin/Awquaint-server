@@ -23,8 +23,16 @@ class UsersController < ApplicationController
     render json: user.nearby.map { |user| {id: (user.id).to_s, interest: user.interest} }
   end
 
+  def add_image
+    @user = User.find(params[:id].to_i)
+    @user.image = params[:image]
+    @user.save
+
+    render json: {id: @user.id, name: @user.name, interest: @user.interest, image: @user.image.url }, status: :ok
+  end
+
   private
   def user_params
-    params.require(:user).permit(:name, :email, :password, :interest)
+    params.require(:user).permit(:name, :email, :password, :interest, :image)
   end
 end
