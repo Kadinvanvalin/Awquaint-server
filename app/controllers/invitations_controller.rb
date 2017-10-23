@@ -18,11 +18,8 @@ class InvitationsController < ApplicationController
   def check
     @user = User.find(params[:current_user_id].to_i)
     pending_invites = @user.received_invitations.where(accepted: "pending")
-    p pending_invites
     accepted_invitations = @user.sent_invitations.where(accepted: "accepted")
-    p accepted_invitations
     declined_invitations = @user.sent_invitations.where(accepted: "declined")
-    p declined_invitations
     if accepted_invitations.length > 0
       connection = accepted_invitations[0].receiver
       accepted_invitations[0].destroy
@@ -33,7 +30,7 @@ class InvitationsController < ApplicationController
     elsif declined_invitations.length > 0
       missed_connection = declined_invitations[0].receiver
       declined_invitations[0].destroy
-      render json: {interest: missed_connection.interest}, status: 418
+      render json: {interest: missed_connection.interest, name: @user.name}, status: 418
     else
       render json: {}, status: 304
     end
@@ -41,6 +38,7 @@ class InvitationsController < ApplicationController
 
   def invitation_response
     invite = Invitation.find_by(sender_id: params[:sender_id].to_i, receiver_id: params[:current_user_id].to_i)
+    user = User.find(params[:current_user_id])
     if params[:response] == "accepted"
       sender = User.find(params[:sender_id].to_i)
       invite.accepted = "accepted"
@@ -49,7 +47,7 @@ class InvitationsController < ApplicationController
     else
       invite.accepted = "declined"
       invite.save
-      render json: {}, status: 418
+      render json: {name: user.name}, status: 418
     end
   end
 
