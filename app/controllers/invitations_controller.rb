@@ -8,10 +8,10 @@ class InvitationsController < ApplicationController
     pending_invites = @inviter.received_invitations.where(accepted: "pending")
     if pending_invites.length > 0
       sender = pending_invites[0].sender
-      render json: {pending_sender_id: sender.id, pending_sender_interest: sender.interest}, status: :ok
+      render json: {create:"already have an invite",pending_sender_id: sender.id, pending_sender_interest: sender.interest}, status: :ok
     else
-      Invitation.create(sender_id: current_user_id, receiver_id: receiver_id, accepted: "pending")
-      render json:{}, status: 201
+     Invitation.create(sender_id: current_user_id, receiver_id: receiver_id, accepted: "created new invite")
+      render json:{create:"pending"}, status: 201
     end
   end
 
@@ -26,14 +26,14 @@ class InvitationsController < ApplicationController
     if accepted_invitations.length > 0
       connection = accepted_invitations[0].receiver
       accepted_invitations[0].destroy
-      render json: {name: connection.name, interest: connection.interest}, status: 202
+      render json: {check: "user accepted your invite",name: connection.name, interest: connection.interest}, status: 202
     elsif  pending_invites.length > 0
       sender = pending_invites[0].sender
-      render json: {pending_sender_id: sender.id, pending_sender_interest: sender.interest}, status: :ok
+      render json: {check: "user sent you a new request",pending_sender_id: sender.id, pending_sender_interest: sender.interest}, status: :ok
     elsif declined_invitations.length > 0
       missed_connection = declined_invitations[0].receiver
       declined_invitations[0].destroy
-      render json: {interest: missed_connection.interest}, status: 418
+      render json: {check: "user declined your request",interest: missed_connection.interest}, status: 418
     else
       render json: {}, status: 304
     end
@@ -45,11 +45,11 @@ class InvitationsController < ApplicationController
       sender = User.find(params[:sender_id].to_i)
       invite.accepted = "accepted"
       invite.save
-      render json: {name: sender.name, interest: sender.interest}, status: 200
+      render json: {invitation_response: "you accepted the invite!", name: sender.name, interest: sender.interest}, status: 200
     else
       invite.accepted = "declined"
       invite.save
-      render json: {}, status: 418
+      render json: {invitation_response: "you declined the invite!",}, status: 418
     end
   end
 
