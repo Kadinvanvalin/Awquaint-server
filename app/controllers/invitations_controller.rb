@@ -45,7 +45,7 @@ class InvitationsController < ApplicationController
       sender = User.find(params[:sender_id].to_i)
       invite.accepted = "accepted"
       invite.save
-      render json: {name: sender.name, interest: sender.interest, sender.image.url}, status: 200
+      render json: {name: sender.name, interest: sender.interest, image: sender.image.url}, status: 200
     else
       invite.accepted = "declined"
       invite.save
