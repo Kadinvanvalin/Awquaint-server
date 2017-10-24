@@ -3,6 +3,8 @@ require 'rails_helper'
 describe "user create route success", type: :request do
 
   before do
+    User.destroy_all
+    Invitation.destroy_all
     post '/users', params: {user: {name: "kadin", email: "kadin@email.com", password: "password"}}
   end
 
