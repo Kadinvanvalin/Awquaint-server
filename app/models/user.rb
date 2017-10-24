@@ -32,11 +32,4 @@ class User < ApplicationRecord
     nearby_users
   end
 
-  def current_user
-
-  end
-
-  def find_all_users
-    User.all
-  end
 end

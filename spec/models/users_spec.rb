@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe 'User' do
-  let(:user) {User.new(name: "Nicole", interest: "nothing", email: "nicole@nicole.com", password: "password", longitude: 87.45345, latitude: -77.234234)}
+  let(:user) {User.create!(name: "Nicole", interest: "nothing", email: "nicole@nicole.com", password: "password", longitude: 87.45345, latitude: -77.234234)}
+  let(:awquaintence) {User.create!(name: "Karl", interest: "Karling", email: "karl@karl.com", password: "password", longitude: 87.45345, latitude: -77.234235)}
 
   it 'has a name' do
     expect(user.name).to eq "Nicole"
@@ -25,6 +26,11 @@ describe 'User' do
 
   it 'has a latitude' do
     expect(user.latitude).to eq -77.234234
+  end
+
+  it 'shows nearby users' do
+    expect(awquaintence).to eq awquaintence
+    expect(user.nearby.first).to eq awquaintence
   end
 
 end
