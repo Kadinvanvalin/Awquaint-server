@@ -23,7 +23,7 @@ class InvitationsController < ApplicationController
     if accepted_invitations.length > 0
       connection = accepted_invitations[0].receiver
       accepted_invitations[0].destroy
-      render json: {name: connection.name, interest: connection.interest, image: connection.image.url, image_key: sender.image_file_name} }, status: 202
+      render json: {name: connection.name, interest: connection.interest, image: connection.image.url, image_key: sender.image_file_name }, status: 202
     elsif  pending_invites.length > 0
       sender = pending_invites[0].sender
       render json: {pending_sender_id: sender.id, pending_sender_interest: sender.interest}, status: :ok
