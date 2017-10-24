@@ -30,7 +30,7 @@ describe 'User' do
 
   it 'shows nearby users' do
     expect(awquaintence).to eq awquaintence
-    expect(user.nearby.first).to eq awquaintence
+    expect(user.nearby.last).to eq awquaintence
   end
 
 end

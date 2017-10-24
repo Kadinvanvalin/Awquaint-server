@@ -12,7 +12,7 @@ kadin = User.create(name: "kadin", email: "kadin@email.com", password: "password
 kara = User.create(name: "kara", email: "squiggles@email.com", password: "password", interest: "La Croix")
 kathiee = User.create(name: "kathiee", email: "kathiee@email.com", password: "password", interest: "snacking")
 nicole = User.create(name: "nicole", email: "nicole@email.com", password: "password", interest: "crockpot")
-karl = User.create(name: "karl", email: "karl@email.com", password: "password", interest: "dancing")
+karl = User.create(name: "karl", email: "karl@email.com", password: "password", interest: "dancing",longitude: 87.45345, latitude: -77.234235)
 
 invite_1 = Invitation.create(accepted: "pending")
 invite_2 = Invitation.create(accepted: "accepted")
