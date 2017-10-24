@@ -7,7 +7,4 @@ class SessionsController < ApplicationController
       render json: {}, status: 400
     end
   end
-
-  def destroy
-  end
 end
