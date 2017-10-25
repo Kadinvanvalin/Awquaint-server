@@ -16,8 +16,11 @@ class User < ApplicationRecord
     min_latitude = self.latitude - 0.0009
     min_longitude = self.longitude - 0.0009
 
+    recent_users = User.where("updated_at >= ?", 5.minutes.ago)
+
     nearby_users = []
-    User.all.each do |user|
+
+    recent_users.all.each do |user|
       if user.longitude != nil && user.latitude != nil
         if user.longitude > min_longitude && user.longitude < max_longitude
           if user.latitude > min_latitude && user.latitude < max_latitude
@@ -29,11 +32,4 @@ class User < ApplicationRecord
     nearby_users
   end
 
-  def current_user
-
-  end
-
-  def find_all_users
-    User.all
-  end
 end

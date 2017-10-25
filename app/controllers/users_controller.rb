@@ -4,9 +4,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
-    if @user.interest == nil
-      @user.interest = "No interest provided"
-    end
+    @user.interest ||= "No interest provided"
     if @user.save
        render json: {id: @user.id, name: @user.name, interest: @user.interest}, status: :ok
     else
@@ -26,6 +24,14 @@ class UsersController < ApplicationController
   def add_image
     @user = User.find(params[:id].to_i)
     @user.image = params[:image]
+    @user.save
+
+    render json: {id: @user.id, name: @user.name, interest: @user.interest, image: @user.image.url }, status: :ok
+  end
+
+  def edit_interest
+    @user = User.find(params[:id].to_i)
+    @user.interest = params[:interest]
     @user.save
 
     render json: {id: @user.id, name: @user.name, interest: @user.interest, image: @user.image.url }, status: :ok
