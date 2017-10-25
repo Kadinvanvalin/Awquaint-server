@@ -10,6 +10,15 @@ describe "user search route", type: :request do
   end
 end
 
+describe "user update interest route", type: :request do
+  before do
+    post '/users/interest', params: {id: User.find_by(name: "nicole").id, interest: "swift"}
+  end
+
+  it "returns the user with an updated interest" do
+    expect(JSON.parse(response.body)["interest"]).to eq "swift"
+  end
+end
 
 
 describe "user create route success", type: :request do
