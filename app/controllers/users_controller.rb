@@ -29,6 +29,14 @@ class UsersController < ApplicationController
     render json: {id: @user.id, name: @user.name, interest: @user.interest, image: @user.image.url }, status: :ok
   end
 
+  def edit_interest
+    @user = User.find(params[:id].to_i)
+    @user.interest = params[:interest]
+    @user.save
+
+    render json: {id: @user.id, name: @user.name, interest: @user.interest, image: @user.image.url }, status: :ok
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :email, :password, :interest, :image)

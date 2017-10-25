@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   post '/invitations/response', to: "invitations#invitation_response"
 
   post '/users/profile', to: "users#add_image"
+
+  post '/users/interest', to: "users#edit_interest"
 end
