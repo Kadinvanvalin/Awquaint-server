@@ -1,24 +1,10 @@
-# README
+# Awquaint-Server [![CircleCI](https://circleci.com/gh/klkelley/Awquaint-server/tree/master.svg?style=svg)](https://circleci.com/gh/klkelley/Awquaint-server/tree/master)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Ruby on Rails backend API for Awquaint iOS app
 
-Things you may want to cover:
+## Authored by
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Kadin Van Valin ([@Kadinvanvalin](https://github.com/kadinvanvalin))
+* Kara Kelley ([@klkelley](https://github.com/klkelley))
+* Nicole Cody ([@ncody](https://github.com/ncody))
+* Katherine Thongsakounh ([@kthong3](https://github.com/kthong3))
